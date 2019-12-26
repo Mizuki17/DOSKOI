@@ -16,7 +16,7 @@
 
 		for (y = 0; y < 15; y++) { for (x = 0; x < 15; t[y][x++] = 0); }
 
-		for (x2 = num / 2, y2 = 0; t[num - 1][num / 2] == 0; cun++) {
+		      for (x2 = num / 2, y2 = 0; t[num - 1][num / 2] == 0; cun++) {
 			if (x2 > num - 1) { x2 = 0; }
 			if (y2 < 0) { y2 = num - 1; }
 			if (t[y2][x2] != 0) { y2 = y2 + 2; x2 = x2--; }
@@ -28,7 +28,7 @@
 			x2++; y2--;
 		}
 
-		for (y = 0; y < num; y++)
+		      for (y = 0; y < num; y++)
 		{
 			for (x = 0; x < num; printf("%3d ", t[y][x++]));
 			printf("\n");
