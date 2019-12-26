@@ -1,1 +1,1 @@
-#include <Windows.h>
+#include "dosukoi.h"
