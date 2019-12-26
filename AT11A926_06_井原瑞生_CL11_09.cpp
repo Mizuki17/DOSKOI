@@ -7,7 +7,7 @@
 	{
 		int t[15][15], x, y, x2, y2, cun=1, num;
 		for (;; system("cls")) {
-			printf("Please enter the random odd number \n");
+			printf("Please enter the random odd number \n‚¤‚ñ‚±");
 			scanf("%d", &num); rewind(stdin);
 			if (num == 2 || num == 4 || num == 6 || num == 8 || num == 10 || num == 12 || num == 14) { printf("enter the random odd number"); getchar(); }
 			else if (num < 16 && num > 0) { break; }
