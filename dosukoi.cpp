@@ -76,7 +76,7 @@ extern"C" {
 			return -1;
 		}
 
-		//フォントサイズ変更
+		//フォントサイズの変更
 		SetCurrentConsoleFontEx(dis_handle[0], TRUE, &font_size);
 		SetCurrentConsoleFontEx(dis_handle[1], TRUE, &font_size);
 
@@ -90,6 +90,20 @@ extern"C" {
 		SetConsoleMode(dis_handle[1], CONSOLE_OUTPUT_MODE);	//バッファ上書きモード
 
 		return 0;
+	}
+
+	void SetFontSize(int width, int height) {
+
+		//フォントサイズ変更
+		font_size.dwFontSize.X = width;
+		font_size.dwFontSize.Y = height;
+		if (dis_handle[1] == NULL) {
+			SetCurrentConsoleFontEx(dis_handle[0], TRUE, &font_size);
+		}
+		else {
+			SetCurrentConsoleFontEx(dis_handle[0], TRUE, &font_size);
+			SetCurrentConsoleFontEx(dis_handle[1], TRUE, &font_size);
+		}
 	}
 
 }
