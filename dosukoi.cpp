@@ -14,8 +14,9 @@ extern"C" {
 	CONSOLE_FONT_INFOEX font_size = { sizeof font_size };
 	SMALL_RECT wind_size;
 	CONSOLE_SCREEN_BUFFER_INFO c_screen_buffer_info;
+	WORD screen_buffer_kind = BLACK ;
 
-
+	int swap_flag = 0;
 	CHAR_INFO* screen_buff;
 
 
@@ -106,6 +107,46 @@ extern"C" {
 		}
 	}
 
+	//ちょっと置いといて
+	/*void DrawString(int x, int y, const char* buf) {
+		TextOut(dis_handle[swap_flag], x, y, buf, sizeof (buf));
+	}*/
+
+
+	//文字出力
+	void PrintString(const char* buf, int size)
+	{
+		DWORD write_num;
+
+		WriteConsole(dis_handle[swap_flag], buf, size, &write_num, NULL);
+	}
 }
 
+
+//画面消去
+void ClearScreen(void)
+{
+	DWORD fill_num;
+	COORD screen_ini = { 0,0 };
+	screen_buffer_kind = c_screen_buffer_info.wAttributes;
+
+	FillConsoleOutputAttribute(dis_handle[swap_flag],
+		c_screen_buffer_info.wAttributes,
+		c_screen_buffer_info.dwSize.X * c_screen_buffer_info.dwSize.Y,
+		screen_ini,
+		&fill_num);
+	FillConsoleOutputCharacter(dis_handle[swap_flag],
+		TEXT(' '),
+		c_screen_buffer_info.dwSize.X * c_screen_buffer_info.dwSize.Y,
+		screen_ini,
+		&fill_num);
+	SetCursorPosition(c_screen_buffer_info.srWindow.Left + 1, c_screen_buffer_info.srWindow.Top + 1);
+
+}
+//ダブルバッファ時画面切り替え
+void FlipScreen(void)
+{
+	SetConsoleActiveScreenBuffer(dis_handle[swap_flag]);	// バッファを入れ替え表示
+	swap_flag = (swap_flag) ? 0 : 1;
+}
 
