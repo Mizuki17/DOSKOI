@@ -56,8 +56,12 @@ extern"C" {
 
 		//コンソールウィンドのモード設定
 		SetConsoleMode(dis_handle[0], CONSOLE_OUTPUT_MODE);
+		SetConsoleMode(input_handle, CONSOLE_INPUT_MODE);
 
-		//スクリーンバッファ用配列
+		//スクリーンバッファの情報取得
+		GetConsoleScreenBufferInfo(dis_handle[0], &c_screen_buffer_info);
+
+		//スクリーンバッファ用配列作成
 		screen_buff = new CHAR_INFO[width * height];
 		memset(screen_buff, 0, width * height);
 
@@ -107,11 +111,11 @@ extern"C" {
 		}
 	}
 
-	//ちょっと置いといて
-	/*void DrawString(int x, int y, const char* buf) {
-		TextOut(dis_handle[swap_flag], x, y, buf, sizeof (buf));
-	}*/
-
+	////ちょっと置いといて
+	//void DrawString(int x, int y, const char* buf) {
+	//	
+	//	TextOut(hdc, x, y, buf, sizeof (buf));
+	//}
 
 	//文字出力
 	void PrintString(const char* buf, int size)
