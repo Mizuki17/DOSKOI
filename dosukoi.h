@@ -42,7 +42,7 @@ extern "C" {
 		WHITE			/* #FFFFFF	”’				*/
 	};
 	void IniDosukoi(int width, int height);
-	void IniDoubleBuffer(void);
+	int IniDoubleBuffer(void);
 	void SetFontSize(int width, int height);
 
 
