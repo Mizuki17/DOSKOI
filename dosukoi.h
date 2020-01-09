@@ -18,7 +18,7 @@ extern "C" {
 #include <string.h>
 #include <windows.h>
 #include <mmsystem.h>
-
+#pragma comment(lib,"winmm.lib")
 
 #define FONTSIZE_X		16
 #define FONTSIZE_Y		16
