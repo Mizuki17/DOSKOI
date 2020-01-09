@@ -14,7 +14,7 @@ extern"C" {
 	CONSOLE_FONT_INFOEX font_size = { sizeof font_size };
 	SMALL_RECT wind_size;
 	CONSOLE_SCREEN_BUFFER_INFO c_screen_buffer_info;
-	WORD screen_buffer_kind = BLACK ;
+	WORD screen_buffer_kind = BLACK;
 
 	int swap_flag = 0;
 	CHAR_INFO* screen_buff;
@@ -31,31 +31,31 @@ extern"C" {
 		input_handle = GetStdHandle(STD_INPUT_HANDLE);
 
 		//履歴保存なし
-		history_info.cbSize = sizeof(CONSOLE_HISTORY_INFO);
-		history_info.HistoryBufferSize = 0;
-		history_info.NumberOfHistoryBuffers = 0;
-		history_info.dwFlags = 0;
-		SetConsoleHistoryInfo(&history_info);
+		history_inf.cbSize = sizeof(CONSOLE_HISTORY_INFO);
+		history_inf.HistoryBufferSize = 0;
+		history_inf.NumberOfHistoryBuffers = 0;
+		history_inf.dwFlags = 0;
+		SetConsoleHistoryInfo(&history_inf);
 
 		//フォントサイズ変更
-		font_size.dwFontSize.X = FONTSIZE_X		16
-        font_size.dwFontSize.Y = FONTSIZE_Y		16
-		SetCurrentConsoleFontEx(window_handle[0], TRUE, &font_size);
+		font_size.dwFontSize.X = FONTSIZE_X;
+		font_size.dwFontSize.Y = FONTSIZE_Y;
+		SetCurrentConsoleFontEx(dis_handle[0], TRUE, &font_size);
 
 		//バッファサイズ変更
 		wind_buffer_size.X = width;
 		wind_buffer_size.Y = height;
 		SetConsoleScreenBufferSize(dis_handle[0], wind_buffer_size);
-		
+
 		//ウィンドサイズ変更
 		wind_size.Left = 0;
 		wind_size.Top = 0;
 		wind_size.Right = width - 1;
 		wind_size.Bottom = height - 1;
-		SetConsoleWindowInfo(dis_handle[0],TRUE, &wind_size);
+		SetConsoleWindowInfo(dis_handle[0], TRUE, &wind_size);
 
 		//コンソールウィンドのモード設定
-		SetConsoleMode(dis_handle[0], &c_screen_buffer_info);
+		SetConsoleMode(dis_handle[0], CONSOLE_OUTPUT_MODE);
 
 		//スクリーンバッファ用配列
 		screen_buff = new CHAR_INFO[width * height];
@@ -81,7 +81,7 @@ extern"C" {
 		SetCurrentConsoleFontEx(dis_handle[0], TRUE, &font_size);
 		SetCurrentConsoleFontEx(dis_handle[1], TRUE, &font_size);
 
-		SetConsoleScreenBufferSize(dis_handle[0],wind_buffer_size);	//バッファサイズ変更
+		SetConsoleScreenBufferSize(dis_handle[0], wind_buffer_size);	//バッファサイズ変更
 		SetConsoleWindowInfo(dis_handle[0], TRUE, &wind_size);		//ウィンドサイズ変更
 
 		SetConsoleScreenBufferSize(dis_handle[1], wind_buffer_size);	//バッファサイズ変更
@@ -140,7 +140,7 @@ void ClearScreen(void)
 		c_screen_buffer_info.dwSize.X * c_screen_buffer_info.dwSize.Y,
 		screen_ini,
 		&fill_num);
-	SetCursorPosition(c_screen_buffer_info.srWindow.Left + 1, c_screen_buffer_info.srWindow.Top + 1);
+	//SetCursorPosition(c_screen_buffer_info.srWindow.Left + 1, c_screen_buffer_info.srWindow.Top + 1);
 
 }
 //ダブルバッファ時画面切り替え
