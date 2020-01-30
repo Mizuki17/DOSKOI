@@ -66,6 +66,9 @@ mciSendString("stop Y", NULL, 0, NULL);
 
 mciSendString("close Y", NULL, 0, NULL);
 音楽ファイルを閉じる
+
+mciSendString("setaudio Y volume to 1000", NULL, 0, NULL);
+音量を1000にする
 */
 ///////////////////////////////////////////////わからなかったらワイサに聞いて
 
